@@ -14,8 +14,6 @@ This repo is an example of how to use the QRWC library with React using MUI
 ## Developing further
 
 - Use existing code as a reference to setup further components/controls
-- Currently `gain`, `mute`, and `text.1` are setup and working
-- Feel free to reach out to Caroline Gingles with questions
 
 ## Some notes
 
@@ -23,4 +21,3 @@ This repo is an example of how to use the QRWC library with React using MUI
   - they should only recieve information relvant to the specific control
 - The structure laid out in this project and above is what makes React re-render when something changes without using state
 - MUI has extensive documentation for almost any UI elemnet you can think of and this project is setup to use them
-- Making this prettier would take CSS time
