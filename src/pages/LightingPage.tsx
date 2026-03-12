@@ -3,6 +3,7 @@ import { displayCardSx } from '../surfaces'
 import {Box, Stack, Typography } from '@mui/material'
 import Fader from '../components/Fader'
 import Momentary from '../components/Momentary'
+import PressNHold from '../components/PressNHold'
 
 export default function PageView({ controls}: any) {
     return (
@@ -27,9 +28,13 @@ export default function PageView({ controls}: any) {
                     Presets
                 </Typography>
                 <Stack direction="row" spacing={6} justifyContent="center" sx={{ mb: 4 }} alignItems="center">             
-                    <Momentary control={controls['LD-Preset_1']['input']} label="Preset 1" />
+                    {/* <Momentary control={controls['LD-Preset_1']['input']} label="Preset 1" /> 
                     <Momentary control={controls['LD-Preset_2']['input']} label="Preset 2" />
                     <Momentary control={controls['LD-Preset_3']['input']} label="Preset 3" />
+                    */}
+                    <PressNHold pressControl={controls['LD-Preset_1']['input']} heldControl={controls['Preset_Save_1']['percent.output']} btnLabel='Preset 1' heldLabel='Saved'/>
+                    <PressNHold pressControl={controls['LD-Preset_2']['input']} heldControl={controls['Preset_Save_2']['percent.output']} btnLabel='Preset 2' heldLabel='Saved'/>
+                    <PressNHold pressControl={controls['LD-Preset_3']['input']} heldControl={controls['Preset_Save_3']['percent.output']} btnLabel='Preset 3' heldLabel='Saved'/>
                 </Stack>
             </Stack>
             </Box> 

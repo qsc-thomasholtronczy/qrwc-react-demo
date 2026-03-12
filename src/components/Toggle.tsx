@@ -1,29 +1,47 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, Typography } from '@mui/material'
 import { IControlState, Control } from '@q-sys/qrwc'
 
 function Toggle({ control, falseLabel, trueLabel }: {control: Control | undefined, falseLabel?: string, trueLabel?: string}) {
-  
   const [toggled, setToggled] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const lastCoreValue = useRef(false)
 
   useEffect(() => {
     if (!control) return
 
-    setToggled(control.state?.Bool)
-    
+    const initial = !!control.state?.Bool
+    lastCoreValue.current = initial
+    setToggled(initial)
+
     const listener = (state: IControlState) => {
-        setToggled(state.Bool)
+      const v = !!state.Bool
+      lastCoreValue.current = v
+      setToggled(v)
+      setBusy(false)
     }
-    control?.on('update', listener)
 
-    return () => {
-        control?.removeListener('update', listener)
+    control.on('update', listener)
+    return () => control.removeListener('update', listener)
+  }, [control])
+
+  if (!control) return null
+
+  const handleClick = async () => {
+    if (busy) return
+    const next = !toggled
+    setToggled(next)
+    setBusy(true)
+
+    try {
+      await control.update(next)
+    } catch (err) {
+      setToggled(lastCoreValue.current)
+      setBusy(false)
+      console.warn('[Toggle] update failed', err)
     }
-}, [control])
+  }
 
-if (!control) {
-    return null
-}
 
     return (
         <Button

@@ -11,6 +11,9 @@ export const COMPONENT_CONTROLS = {
   'LD-Preset_1': ['input'],
   'LD-Preset_2': ['input'],
   'LD-Preset_3': ['input'],
+  'Preset_Save_1': ['percent.output'],
+  'Preset_Save_2': ['percent.output'],
+  'Preset_Save_3': ['percent.output'],
 
   'AC-Meters': ['meter.1', 'meter.2', 'meter.3'],
   'AC-Gain_1': ['mute'],
