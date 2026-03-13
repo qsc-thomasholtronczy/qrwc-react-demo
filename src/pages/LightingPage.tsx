@@ -2,7 +2,6 @@ import React from 'react'
 import { displayCardSx } from '../surfaces'
 import {Box, Stack, Typography } from '@mui/material'
 import Fader from '../components/Fader'
-import Momentary from '../components/Momentary'
 import PressNHold from '../components/PressNHold'
 
 export default function PageView({ controls}: any) {
