@@ -20,28 +20,51 @@ export default function PageView({ controls }: any) {
                     borderRadius: 1,
                     overflow: 'hidden',
                     position: 'relative',
-
-                    backgroundImage: airwallState
-                    ? 'url("/combined.png")'
-                    : 'url("/divided.png")',
+                })}>
+                {/* Combined */}
+                <Box
+                    sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: 'url("/combined.png")',
                     backgroundSize: 'contain',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
+                    opacity: airwallState ? 1 : 0,
+                    transition: 'opacity 200ms ease',
+                    }}
+                />
 
-                    '&::before': {
-                    content: '""',
+                {/* Divided */}
+                <Box
+                    sx={{
                     position: 'absolute',
                     inset: 0,
+                    backgroundImage: 'url("/divided.png")',
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    opacity: airwallState ? 0 : 1,
+                    transition: 'opacity 200ms ease',
+                    }}
+                />
+
+                {/* Overlay tint */}
+                <Box
+                    sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    pointerEvents: 'none',
+                    opacity: 0.4,
                     background: airwallState
-                        ? theme.palette.success.main
-                        : `linear-gradient(to right,
+                        ? (theme) => theme.palette.success.main
+                        : (theme) =>
+                            `linear-gradient(to right,
                             ${theme.palette.error.main} 0 50%,
                             ${theme.palette.success.main} 50% 100%)`,
-                    opacity: 0.4,
-                    pointerEvents: 'none',
-                    },
-                })}
-            />
+                    }}
+                />
+            </Box>
             <Box sx={(theme) => ({ ...displayCardSx(theme), width: '40%' })}>
             <Stack direction="column" spacing={2} justifyContent="center" sx={{ m:4}} alignItems="center">
                 <Typography variant='h6' sx={{ color: 'text.primary'}}>
